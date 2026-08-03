@@ -93,6 +93,8 @@ import { createCachedViteHtmlRenderer } from "./vite-html-renderer.js";
 import { DEFAULT_JSON_BODY_LIMIT, PORTABLE_JSON_BODY_LIMIT } from "./http/body-limits.js";
 import { COMPANY_IMPORT_API_PATH } from "./routes/company-import-paths.js";
 import { apiCompression } from "./middleware/api-compression.js";
+import { apiCorsMiddleware } from "./middleware/api-cors.js";
+import { controlPlaneRoutes } from "./routes/control-plane.js";
 
 type UiMode = "none" | "static" | "vite-dev";
 const FEEDBACK_EXPORT_FLUSH_INTERVAL_MS = 5_000;
@@ -293,6 +295,9 @@ export async function createApp(
     verify: captureRawBody,
   }));
   app.use("/api", apiCompression());
+  // CORS for inbound control-plane UIs (BIZEVAL etc.) must run before auth so
+  // browser preflight OPTIONS does not require a bearer key.
+  app.use("/api", apiCorsMiddleware());
   app.use(httpLogger);
   const privateHostnameGateEnabled = shouldEnablePrivateHostnameGuard({
     deploymentMode: opts.deploymentMode,
@@ -365,6 +370,7 @@ export async function createApp(
       databaseBackupHealth: opts.databaseBackupHealth,
     }),
   );
+  api.use("/control-plane", controlPlaneRoutes(db));
   api.use(openApiRoutes());
   api.use("/companies", companyRoutes(db, opts.storageService));
   api.use(llmRoutes(db));

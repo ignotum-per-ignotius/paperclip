@@ -765,6 +765,7 @@ const BOARD_ONLY_OPERATIONS = new Set([
   "GET /api/companies/import/jobs/{jobId}",
   "POST /api/board-claim/{token}/claim",
   "GET /api/cli-auth/me",
+  "GET /api/control-plane/connect",
   "POST /api/companies/{companyId}/invites",
   "GET /api/companies/{companyId}/invites",
   "POST /api/companies/{companyId}/openclaw/invite-prompt",
@@ -4002,6 +4003,16 @@ registry.registerPath({
   path: "/api/cli-auth/me",
   tags: ["access"],
   summary: "Get current CLI auth session",
+  responses: { 200: r.ok(), 401: r.unauthorized },
+});
+
+registry.registerPath({
+  method: "get",
+  path: "/api/control-plane/connect",
+  tags: ["access"],
+  summary: "Verify inbound control-plane connect (board API key)",
+  description:
+    "Used by external products (for example BIZEVAL) that store a Paperclip base URL and board API key. Returns the authenticated board actor and companies available for division mapping.",
   responses: { 200: r.ok(), 401: r.unauthorized },
 });
 
