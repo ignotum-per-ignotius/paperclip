@@ -26,7 +26,8 @@ substrate on the PAP-10341 branch canonical:
   this branch instead of spawning new integration substrates.
 - **D5: inbound stays thin.** External clients that call Paperclip use scoped
   Paperclip tokens and existing profiles/rules. They do not get a separate
-  permission model.
+  permission model. See [INBOUND-CONTROL-PLANE.md](./INBOUND-CONTROL-PLANE.md)
+  for products such as BIZEVAL that connect with a Paperclip URL + board API key.
 
 ## Canonical Object Model
 
