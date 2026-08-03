@@ -107,9 +107,39 @@ When `PAPERCLIP_DEPLOYMENT_EXPOSURE=private`, the Host header must be
 allowlisted (`paperclipai allowed-hostname` / config). Point the Connect UI at a
 hostname Paperclip accepts.
 
+## Richer post-connect UI (BIZEVAL embed)
+
+Ship the Agents → Paperclip Control Layer experience with
+`@paperclipai/control-plane-client`:
+
+```tsx
+import { PaperclipControlLayer } from "@paperclipai/control-plane-client/react";
+import "@paperclipai/control-plane-client/react/styles.css";
+
+<PaperclipControlLayer
+  divisionId="it"
+  divisionName="IT"
+  defaultApiBaseUrl="https://your-paperclip-hostinger-url"
+/>
+```
+
+After connect, the panel shows company mapping, agents, active tasks, and deep
+links into Paperclip. Package docs:
+[`packages/control-plane-client/README.md`](../../packages/control-plane-client/README.md).
+
+### Hostinger checklist
+
+1. Deploy / open your Paperclip instance on Hostinger.
+2. Set `PAPERCLIP_PUBLIC_URL` to that public URL.
+3. Set `PAPERCLIP_API_CORS_ORIGINS` to your BIZEVAL web origin (required for a
+   browser Connect form on a different host).
+4. Mint a `pcp_board_…` key and paste URL + key into BIZEVAL.
+5. Map the IT division to the returned company and manage agents/tasks from the
+   connected panel (or click **Open Paperclip** for the full board).
+
 ## Non-goals
 
-- Paperclip does not embed the BIZEVAL UI.
+- Paperclip does not host the full BIZEVAL product UI.
 - Apps → Connections remains the **outbound** tool-install surface (agents
   calling Slack, GitHub, MCP, etc.).
 - Inbound clients do not receive a parallel permission system; use company

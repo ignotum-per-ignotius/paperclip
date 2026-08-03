@@ -39,13 +39,24 @@ This matches product law **D5 (inbound stays thin)** in
 4. In BIZEVAL, paste URL + key and connect; map the IT division to the returned
    company id.
 
-## Follow-ups (not in this revision)
+## Richer post-connect UX
 
-- Richer post-connect UX inside BIZEVAL (agent list, issue sync) lives in the
-  BIZEVAL repo, not Paperclip.
+BIZEVAL source is not in this workspace, so the richer Agents panel ships as an
+embeddable package:
+
+- `@paperclipai/control-plane-client` — fetch client for Hostinger/local Paperclip
+- `@paperclipai/control-plane-client/react` — `PaperclipControlLayer` with
+  connect form + connected agents/tasks/company mapping
+
+Wire it into BIZEVAL's Agents page by importing the React export (see package
+README). Operator still points the form at the Hostinger Paperclip URL.
+
+## Follow-ups
+
+- Drop `PaperclipControlLayer` into the private BIZEVAL app source when that
+  repo is available to this agent.
 - Optional: never-expire board-key minting affordance in the Paperclip board UI
   (today: CLI / API).
-- Optional: shared TypeScript client SDK for inbound control-plane products.
 
 ## Non-goals
 
