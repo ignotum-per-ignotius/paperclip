@@ -8,6 +8,7 @@ export default defineConfig({
       "packages/db",
       "packages/adapter-utils",
       "packages/control-plane-client",
+      "packages/bizeval-onboarding",
       "packages/adapters/claude-local",
       "packages/adapters/codex-local",
       "packages/adapters/cursor-cloud",
