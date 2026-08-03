@@ -41,20 +41,24 @@ This matches product law **D5 (inbound stays thin)** in
 
 ## Richer post-connect UX
 
-BIZEVAL source is not in this workspace, so the richer Agents panel ships as an
-embeddable package:
+BIZEVAL source is not in this workspace, so richer BIZEVAL panels ship as
+embeddable packages:
 
 - `@paperclipai/control-plane-client` — fetch client for Hostinger/local Paperclip
 - `@paperclipai/control-plane-client/react` — `PaperclipControlLayer` with
   connect form + connected agents/tasks/company mapping
+- `@paperclipai/bizeval-onboarding` — Staff Features **Onboarding** tile + panel
+  (setup checklist progress; tasks on time / due today / overdue by N days)
 
-Wire it into BIZEVAL's Agents page by importing the React export (see package
-README). Operator still points the form at the Hostinger Paperclip URL.
+Wire them into BIZEVAL by importing the React exports (see package READMEs).
+Operator still points the Connect form at the Hostinger Paperclip URL.
 
 ## Follow-ups
 
-- Drop `PaperclipControlLayer` into the private BIZEVAL app source when that
-  repo is available to this agent.
+- Drop `PaperclipControlLayer` into the private BIZEVAL Agents → Paperclip
+  Control Layer page when that repo is available to this agent.
+- Replace Staff Features Onboarding **Coming Soon** with
+  `StaffFeaturesOnboarding` from `@paperclipai/bizeval-onboarding/react`.
 - Optional: never-expire board-key minting affordance in the Paperclip board UI
   (today: CLI / API).
 
