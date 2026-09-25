@@ -16,6 +16,7 @@ includes:
   - agents/analysis-chief/AGENTS.md
   - agents/dissemination-chief/AGENTS.md
   - agents/operations-effects-chief/AGENTS.md
+  - agents/analyst/AGENTS.md
 defaultInstall: false
 recommendedForCompanyTypes:
   - intelligence
