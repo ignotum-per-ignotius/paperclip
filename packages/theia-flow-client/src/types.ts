@@ -93,3 +93,32 @@ export class FlowClientError extends Error {
     this.body = body;
   }
 }
+
+
+export type FlowCompanySkill = {
+  id: string;
+  key?: string;
+  name?: string;
+  slug?: string;
+  description?: string | null;
+  status?: string;
+  [key: string]: unknown;
+};
+
+export type FlowAgentSkillSnapshot = {
+  adapterType: string;
+  supported: boolean;
+  mode?: string;
+  desiredSkills?: unknown[];
+  effectiveSkills?: unknown[];
+  warnings?: unknown[];
+  [key: string]: unknown;
+};
+
+export type FlowInstructionsBundle = {
+  mode?: string;
+  rootPath?: string | null;
+  entryFile?: string | null;
+  files?: unknown[];
+  [key: string]: unknown;
+};
