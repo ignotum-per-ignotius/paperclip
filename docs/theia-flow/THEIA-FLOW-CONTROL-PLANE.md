@@ -72,5 +72,5 @@ why the capability cannot live in one of these layers:
 
 ## Upgrade baseline
 
-The first Flow v2 baseline is PaperClip `v2026.916.0`. The prior customized
+The first Flow v2 baseline is PaperClip `v2026.916.1`. The prior customized
 fork remains historical reference and is not merged wholesale into this branch.
