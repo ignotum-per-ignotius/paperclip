@@ -3,9 +3,9 @@
 ## Baseline
 
 - Upstream: `paperclipai/paperclip`
-- Baseline release: `v2026.916.0`
-- Baseline commit: `dffc2b3ca1b9e88fa21cb17493083e682dffd1ca`
-- Migration branch: `theia-flow-v2-paperclip-2026.916.0`
+- Baseline release: `v2026.916.1`
+- Baseline commit: `d554c4789ed3930f8a53ac9fdf6503b3187097da`
+- Migration branch: `theia-flow-v2-paperclip-2026.916.1`
 - Historical customized branch: `master`
 
 The historical branch is not merged wholesale. Flow-specific capabilities are
@@ -90,7 +90,7 @@ PaperClip API operations that have not yet earned a stable typed wrapper.
 The API credential is held in a JavaScript private field and is never
 persisted by the package.
 
-## v2026.916.0 adoption priorities
+## v2026.916.1 adoption priorities
 
 ### Required
 
@@ -113,9 +113,13 @@ persisted by the package.
 7. Validate local Ollama-oriented agent configurations where supported by the
    selected adapter/runtime path.
 
+## Patch baseline note
+
+PaperClip v2026.916.1 is a patch release over v2026.916.0. It adds no database migrations, configuration changes, or API changes. It fixes task-conversation sending and a related database conflict-classification path.
+
 ## Upgrade constraints
 
-PaperClip v2026.916.0 requires Node.js 24.11 or newer and adds database
+PaperClip v2026.916.1 requires Node.js 24.11 or newer and adds database
 migrations 0231 through 0279.
 
 Migration validation must use an isolated copy of Flow data before any
