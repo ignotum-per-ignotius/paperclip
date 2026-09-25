@@ -42,20 +42,20 @@ function normalizeApiBase(apiBaseUrl: string): string {
  */
 export class TheiaFlowClient {
   readonly apiBaseUrl: string;
-  private readonly apiKey: string;
+  readonly #apiKey: string;
   private readonly fetchImpl: typeof fetch;
 
   constructor(opts: TheiaFlowClientOptions) {
     this.apiBaseUrl = normalizeApiBase(opts.apiBaseUrl);
-    this.apiKey = opts.apiKey.trim();
-    if (!this.apiKey) throw new FlowClientError(400, "Flow API key is required");
+    this.#apiKey = opts.apiKey.trim();
+    if (!this.#apiKey) throw new FlowClientError(400, "Flow API key is required");
     this.fetchImpl = opts.fetchImpl ?? fetch.bind(globalThis);
   }
 
   private async request<T>(path: string, init: RequestInit = {}): Promise<T> {
     const url = `${this.apiBaseUrl}${path.startsWith("/") ? path : `/${path}`}`;
     const headers = new Headers(init.headers);
-    headers.set("Authorization", `Bearer ${this.apiKey}`);
+    headers.set("Authorization", `Bearer ${this.#apiKey}`);
     headers.set("Accept", "application/json");
     if (init.body && !headers.has("Content-Type")) headers.set("Content-Type", "application/json");
 
