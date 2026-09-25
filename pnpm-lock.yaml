@@ -862,8 +862,6 @@ importers:
         specifier: ^24.0.0
         version: 24.13.3
 
-  packages/theia-flow-client: {}
-
   server:
     dependencies:
       '@aws-sdk/client-s3':
