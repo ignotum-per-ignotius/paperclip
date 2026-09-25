@@ -5,6 +5,9 @@ import {
   type FlowCompany,
   type FlowHealth,
   type FlowIssue,
+  type FlowCompanySkill,
+  type FlowAgentSkillSnapshot,
+  type FlowInstructionsBundle,
   type FlowIssueFilters,
   type FlowOrgNode,
 } from "./types.js";
@@ -110,6 +113,53 @@ export class TheiaFlowClient {
 
   getOrg(companyId: string): Promise<FlowOrgNode[]> {
     return this.request<FlowOrgNode[]>(`/api/companies/${encodeURIComponent(companyId)}/org`);
+  }
+
+  listCompanySkills(companyId: string, query: { q?: string; sort?: string; scope?: string } = {}): Promise<FlowCompanySkill[]> {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(query)) {
+      if (value) params.set(key, value);
+    }
+    const search = params.toString();
+    return this.request<FlowCompanySkill[]>(
+      `/api/companies/${encodeURIComponent(companyId)}/skills${search ? `?${search}` : ""}`,
+    );
+  }
+
+  getAgentSkills(agentId: string, companyId?: string): Promise<FlowAgentSkillSnapshot> {
+    const params = new URLSearchParams();
+    if (companyId) params.set("companyId", companyId);
+    const search = params.toString();
+    return this.request<FlowAgentSkillSnapshot>(
+      `/api/agents/${encodeURIComponent(agentId)}/skills${search ? `?${search}` : ""}`,
+    );
+  }
+
+  syncAgentSkills(
+    agentId: string,
+    desiredSkills: unknown[],
+    mode: string,
+    companyId?: string,
+  ): Promise<FlowAgentSkillSnapshot> {
+    const params = new URLSearchParams();
+    if (companyId) params.set("companyId", companyId);
+    const search = params.toString();
+    return this.request<FlowAgentSkillSnapshot>(
+      `/api/agents/${encodeURIComponent(agentId)}/skills/sync${search ? `?${search}` : ""}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ desiredSkills, mode }),
+      },
+    );
+  }
+
+  getAgentInstructions(agentId: string, companyId?: string): Promise<FlowInstructionsBundle> {
+    const params = new URLSearchParams();
+    if (companyId) params.set("companyId", companyId);
+    const search = params.toString();
+    return this.request<FlowInstructionsBundle>(
+      `/api/agents/${encodeURIComponent(agentId)}/instructions-bundle${search ? `?${search}` : ""}`,
+    );
   }
 
   listIssues(companyId: string, filters: FlowIssueFilters = {}): Promise<FlowIssue[]> {
